@@ -11,9 +11,6 @@ def average(X):
 
 
 def codeviance(X, Y):
-
     av_x = average(X)
     av_y = average(Y)
     return average(X*Y) - (av_x * av_y)
-
-

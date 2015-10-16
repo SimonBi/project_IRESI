@@ -13,10 +13,10 @@ def hashing(a,b,x,u,k):
     return y
     
 
-def choosehashfunctions(m):
+def choosehashfunctions(t):
     '''Create m different hasing functions by randomly
     choosing values for a and b'''
-    hash_f = np.array([[0.,0.] for i in range(m)])
+    hash_f = np.array([[0.,0.] for i in range(t)])
     for i in range(m):
         a = randint(1, m-1)
         b = randint(0, m-1)
@@ -24,13 +24,13 @@ def choosehashfunctions(m):
     return hash_f
 
 
-def partition(data,m,k,u):
+def partition(data,t,k,u):
     '''Return a m*x matrix once hashing 
     functions have been applied to data'''
     
-    hash_f = choosehashfunctions(m)
+    hash_f = choosehashfunctions(t)
     
-    repartition = np.array([[0. for j in range(k)] for i in range(m)], dtype = float)
+    repartition = np.array([[0. for j in range(k)] for i in range(t)], dtype = float)
     
     while data != []:
         x = data.pop()
