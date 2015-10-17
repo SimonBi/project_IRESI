@@ -1,4 +1,10 @@
 def extract_sources(id_file):
+    """
+    Extract the sources of the requests and convert them into integers.
+    :arg id_file: Id of one of the two sdsc-http traces.
+    :type id_file: 1 or 2.
+    :return: List of integers.
+    """
     sources = []
     if id_file == 1:
         filename = '2sdschttp.txt'
