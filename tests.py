@@ -1,7 +1,15 @@
-from codeviance import *
+from computing import *
 
 
-X = np.array([2, 4], dtype=float)
-Y = np.array([0, 1], dtype=float)
+X = [randint(0, 50) for i in range(50)]
+Y = [randint(0, 50) for i in range(50)]
+Z = [randint(0, 50) for i in range(50)]
 
-print(codeviance(X, Y))
+u = 50
+eps = 0.01
+delta = 0.0001
+
+DATA = [X, Y,Z]
+
+cod_matrix = codeviance_all_streams(DATA, eps, delta, u)
+print(cod_matrix)

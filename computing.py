@@ -1,11 +1,10 @@
-import numpy as np
-
 from hashing import *
 from codeviance import *
 
 
 def min_vect(l):
-    '''Return the minimum element of l'''
+    """Return the minimum element of l"""
+    
     n = len(l)
     if n == 0:
         return "Error min"
@@ -17,17 +16,17 @@ def min_vect(l):
             return l[0]
         else:
             return x
-            
+      
 
-def codeviance_two_streams(data1,data2,t,k,u):
-    '''Return the codeviance between two streams'''
+def codeviance_two_streams(data1, data2, t, k, u):
+    """Return the codeviance between two streams"""
     
+    hash_f = choosehashfunctions(t)
     
+    repartition1 = partition(data1, t, k, u, hash_f)
+    repartition2 = partition(data2, t, k, u, hash_f)
     
-    repartition1 = partition(data1,m,t,u)
-    repartition2 = partition(data2,m,t,u)
-    
-    cod_vect = np.array([0. for i in range(k)], dtype = float)
+    cod_vect = np.array([0. for i in range(t)], dtype=float)
     
     for i in range(t):
         cod = codeviance(repartition1[i], repartition2[i])
@@ -36,18 +35,19 @@ def codeviance_two_streams(data1,data2,t,k,u):
     return min_vect(cod_vect)
     
     
-def codeviance_all_streams(DATA,eps,delta,u):
-    ''' DATA = array of steams
-    Return the codevianc matrix'''
-    n = len(DATA)
-    cod_matrix = np.array([[0. for i in range(n)] for j in range(n)], dtype = float)
+def codeviance_all_streams(DATA, eps, delta, u):
+    """ DATA = array of steams
+    Return the codevianc matrix"""
     
-    m = np.ceil( np.ln( 1 / delta ) )
-    k = 1 / eps
+    n = len(DATA)
+    cod_matrix = np.array([[0. for i in range(n)] for j in range(n)], dtype=float)
+    
+    t = int(np.ceil( np.log( 1 / delta ) ))
+    k = int( np.ceil(1 / eps))
     
     for i in range(n):
         for j in range(i,n):
-            cod = codeviance_two_streams(DATA[i], DATA[j], m, k, u)
+            cod = codeviance_two_streams(DATA[i], DATA[j], t, k, u)
             cod_matrix[i,j] = cod
             cod_matrix[j,i] = cod
     

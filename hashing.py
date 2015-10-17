@@ -7,38 +7,36 @@ from random import randint
 # We create k partitions
 # We use m different hashing functions
 
-def hashing(a,b,x,u,k):
-    '''Universal hashing function'''
+def hashing(a, b, x, u, k):
+    """Universal hashing function"""
+    
     y = ((a*x + b) % u) % k
     return y
     
 
 def choosehashfunctions(t):
-    '''Create m different hasing functions by randomly
-    choosing values for a and b'''
-    hash_f = np.array([[0.,0.] for i in range(t)])
-    for i in range(m):
-        a = randint(1, m-1)
-        b = randint(0, m-1)
+    """Create t different hashing functions by randomly
+    choosing values for a and b"""
+    
+    hash_f = np.array([[0, 0] for i in range(t)])
+    for i in range(t):
+        a = randint(1, t-1)
+        b = randint(0, t-1)
         hash_f[i,0], hash_f[i,1] = a,b
     return hash_f
 
 
-def partition(data,t,k,u):
-    '''Return a m*x matrix once hashing 
-    functions have been applied to data'''
+def partition(data, t, k, u, hash_f):
+    """Return a t*x matrix once hashing 
+    functions have been applied to data"""
     
-    hash_f = choosehashfunctions(t)
-    
-    repartition = np.array([[0. for j in range(k)] for i in range(t)], dtype = float)
-    
-    while data != []:
-        x = data.pop()
-        for i in range(m):
+    repartition = np.array([[0 for j in range(k)] for i in range(t)])
+    data_copy = data[:]
+    while data_copy != []:
+        x = data_copy.pop()
+        for i in range(t):
             j = hashing(hash_f[i,0], hash_f[i,1], x, u, k)
             repartition[i,j] += 1
     
     return repartition
-    
-    
     
