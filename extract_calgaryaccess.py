@@ -4,7 +4,7 @@ def extract_sources():
     :return: List of integers.
     """
     sources = []
-    with open('traces/traces/3Calgaryaccess_log.txt') as logF:
+    with open('traces/traces/3Calgaryaccess_log.txt', encoding="latin-1") as logF:
         for line in logF:
             host_request = line.split(' ')[0]
             sources += [int(host_request == 'local')]
@@ -17,7 +17,7 @@ def extract_filename():
     :return: List of integers.
     """
     filenames = []
-    with open('traces/traces/3Calgaryaccess_log.txt') as logF:
+    with open('traces/traces/3Calgaryaccess_log.txt', encoding="latin-1") as logF:
         for line in logF:
             file_request = line.split(' ')[6]
             filenames += [sum(ord(c) for c in file_request)]

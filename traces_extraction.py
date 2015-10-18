@@ -20,10 +20,15 @@ def extract_entries(id_traces, random_entries=False, size_entries=0,
         entries = t2.extract_sources(id_traces[1])
     else:
         entries = t3.extract_filename()
+    entries_set = set(entries)
+    elements = list(entries_set)
+    bijection = {elements[i]: i for i in range(len(elements))}
+    entries = [bijection[e] for e in entries]
     various_information = {'elements': entries,
-                           'distinct_elements': list(set(entries)),
+                           'distinct_elements': [bijection[e] for e in elements],
                            'size': len(entries),
-                           'frequency': {}}
+                           'frequency': {},
+                           'max': len(elements)}
     for e in various_information['distinct_elements']:
         various_information['frequency'][e] = \
             len([el for el in entries if el == e]) / len(entries)
@@ -46,4 +51,4 @@ def generate_random_entries(size, nb_distinct, distribution):
         entries += [i] * (size / distribution[i])
     return entries
 
-extract_entries('1')
+print(extract_entries('1'))
