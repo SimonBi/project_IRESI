@@ -51,4 +51,4 @@ def generate_random_entries(size, nb_distinct, distribution):
         entries += [i] * (size / distribution[i])
     return entries
 
-print(extract_entries('1'))
+#print(extract_entries('1'))
