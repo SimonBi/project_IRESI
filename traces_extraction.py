@@ -3,7 +3,7 @@ import extract_sdschttp as t2
 import extract_calgaryaccess as t3
 
 
-def extract_entries(id_traces, random_entries=False, size_entries=0,
+def extract_entries(id_traces, random_entries=False, data=[], size_entries=0,
                     nb_distinct=0, distribution=()):
     """
     Extract what will be used as entries.
@@ -12,8 +12,7 @@ def extract_entries(id_traces, random_entries=False, size_entries=0,
     :return: A dictionary with various information on the entries.
     """
     if random_entries:
-        entries = generate_random_entries(size_entries, nb_distinct,
-                                          distribution)
+        entries = data
     elif id_traces == '1':
         entries = t1.extract_sources()
     elif id_traces[0] == '2':
@@ -50,5 +49,6 @@ def generate_random_entries(size, nb_distinct, distribution):
     for i in range(0, nb_distinct):
         entries += [i] * (size / distribution[i])
     return entries
+    
 
 #print(extract_entries('1'))
