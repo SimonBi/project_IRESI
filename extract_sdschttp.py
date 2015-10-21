@@ -6,7 +6,7 @@ def extract_sources(id_file):
     :return: List of integers.
     """
     sources = []
-    if id_file == 1:
+    if id_file == '1':
         filename = '2sdschttp.txt'
     else:
         filename = '2sdschttp' + str(id_file) + '.txt'
