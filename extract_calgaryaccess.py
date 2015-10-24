@@ -19,7 +19,5 @@ def extract_filename():
     filenames = []
     with open('traces/traces/3Calgaryaccess_log.txt', encoding="latin-1") as logF:
         for line in logF:
-            file_request = line.split(' ')[6]
-            filenames += [sum(ord(c) for c in file_request)]
+            filenames += [line.split(' ')[6]]
     return filenames
-
