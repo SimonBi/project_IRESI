@@ -1,6 +1,5 @@
 from computing import *
 from traces_extraction import *
-from distribution import *
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.mlab import griddata
@@ -40,7 +39,6 @@ def print_data(data):
     return None
 
 #print_data(data12)
-
 
 
 DATA = [globals()['data' + str(i)] for i in range(13)]
@@ -84,10 +82,9 @@ for k in range(169):
 
 X, Y = np.meshgrid(Xi, Yi)
 
-Z1 = griddata(x, y, z1, X, Y)
-Z2 = griddata(x, y, z2, X, Y)
+Z1 = griddata(x, y, z1, X, Y, interp='linear')
+Z2 = griddata(x, y, z2, X, Y, interp='linear')
 
-ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1)
-ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1)
+ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1, color='b')
+ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1, color='b')
 plt.show()
-

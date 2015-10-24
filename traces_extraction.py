@@ -1,10 +1,10 @@
 import extract_epahttp as t1
 import extract_sdschttp as t2
 import extract_calgaryaccess as t3
+from distribution import *
 
 
-def extract_entries(id_traces, random_entries=False, data=[], size_entries=0,
-                    nb_distinct=0, distribution=()):
+def extract_entries(id_traces, random_entries=False, data=[]):
     """
     Extract what will be used as entries.
     :param id_traces: Id of the trace chosen. '22' for the second sdsc trace.
