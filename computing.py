@@ -29,7 +29,7 @@ def codeviance_two_streams(data1, data2, t, k, u):
     cod_vect = np.array([0. for i in range(t)], dtype=float)
     
     for i in range(t):
-        cod = codeviance(repartition1[i], repartition2[i])
+        cod = codeviance_sketchmin(repartition1[i], repartition2[i])
         cod_vect[i] = cod
     
     return min_vect(cod_vect)
