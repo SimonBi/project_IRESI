@@ -10,25 +10,25 @@ ax2 = fig2.add_subplot(111, projection='3d')
 
 
 size = 1000
-u = 100
-eps = 0.1
+u = 10
+eps = 0.3
 delta = 0.001
 
 print("Starting generation")
 
-data0 = extract_entries('', True, entry_uniform(size,u))['elements']
-data1 = extract_entries('', True, entry_zipfian(size,u,2))['elements']
-data2 = extract_entries('', True, entry_zipfian(size,u,3))['elements']
-data3 = extract_entries('', True, entry_zipfian(size,u,4))['elements']
-data4 = extract_entries('', True, entry_zipfian(size,u,5))['elements']
-data5 = extract_entries('', True, entry_zipfian(size,u,6))['elements']
-data6 = extract_entries('', True, entry_poisson(size,u, u/(2**1)))['elements']
-data7 = extract_entries('', True, entry_poisson(size,u, u/(2**2)))['elements']
-data8 = extract_entries('', True, entry_poisson(size,u, u/(2**3)))['elements']
-data9 = extract_entries('', True, entry_poisson(size,u, u/(2**4)))['elements']
-data10 = extract_entries('', True, entry_poisson(size,u, u/(2**5)))['elements']
-data11 = extract_entries('', True, entry_binomial(size,u, 0.42))['elements']
-data12 = extract_entries('', True, entry_negative_binomial(size,u, 0.42))['elements']
+data0 = entry_uniform(size, u)
+data1 = entry_zipfian(size, u,2)
+data2 = entry_zipfian(size, u,3)
+data3 = entry_zipfian(size, u,4)
+data4 = entry_zipfian(size, u,5)
+data5 = entry_zipfian(size, u,6)
+data6 = entry_poisson(size, u, u/(2**1))
+data7 = entry_poisson(size, u, u/(2**2))
+data8 = entry_poisson(size, u, u/(2**3))
+data9 = entry_poisson(size, u, u/(2**4))
+data10 = entry_poisson(size, u, u/(2**5))
+data11 = entry_binomial(size, u, 0.42)
+data12 = entry_negative_binomial(size, u, 0.42)
 
 print("Ending generation")
 
@@ -41,17 +41,18 @@ def print_data(data):
     plt.show()
     return None
 
-#print_data(data12)
+#print_data(data0['elements'])
 
 
-DATA = [globals()['data' + str(i)] for i in range(13)]
+DATA_elts = [globals()['data' + str(i)] for i in range(13)]
+DATA_freq = [freq_vect(DATA_elts[i],u+1) for i in range(13)]
 
 
-### SKECH MIN RESULTS
+## SKECH MIN RESULTS
 
 print('Starting computing sketchmin codeviance matrix')
 
-cod_matrix = codeviance_all_streams(DATA, eps, delta, u)
+cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
 
 print('Ending computing sketchmin codeviance matrix')
 
@@ -60,9 +61,10 @@ print('Ending computing sketchmin codeviance matrix')
 print('Starting computing accurate codeviance matrix')
 
 cod_real_matrix = np.array([[0. for i in range(13)] for j in range(13)], dtype=float)
+
 for i in range(13):
         for j in range(i,13):
-            cod = codeviance(np.array([e for e in DATA[i]]), np.array([e for e in DATA[j]]))
+            cod = codeviance(DATA_freq[i], DATA_freq[j])
             cod_real_matrix[i,j] = cod
             cod_real_matrix[j,i] = cod
 
@@ -80,15 +82,15 @@ y = np.array([i for i in range(13) for j in range(13)])
 
 # Real
 z1 = np.array([cod_real_matrix[i,j] for i in range(13) for j in range(13)])
-mini = min_vect(z1)
-for k in range(169):
-        z1[k] = np.log(z1[k] + abs(mini) + 1)
+#mini = min_vect(z1)
+#for k in range(169):
+#        z1[k] = np.log(z1[k] + abs(mini) + 1)
         
 # Sketch min
 z2 = np.array([cod_matrix[i,j] for i in range(13) for j in range(13)])
-mini = min_vect(z2)
-for k in range(169):
-        z2[k] = np.log(z2[k] + abs(mini) + 1)
+#mini = min_vect(z2)
+#for k in range(169):
+#        z2[k] = np.log(z2[k] + abs(mini) + 1)
 
 X, Y = np.meshgrid(Xi, Yi)
 

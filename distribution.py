@@ -6,7 +6,7 @@ def entry_uniform(size, u):
     {0..u} following distribution """
     entries = []
     for i in range(size):
-        x = uniform(0,u)
+        x = int(uniform(0,u))
         entries.append(x)
     return entries
 
@@ -49,5 +49,7 @@ def entry_negative_binomial(size, u, p):
     entries = []
     for i in range(size):
         x = negative_binomial(u,p)
+        while x > u or x < 0:
+            x = negative_binomial(u,p)
         entries.append(x)
     return entries

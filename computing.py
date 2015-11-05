@@ -29,7 +29,7 @@ def codeviance_two_streams(data1, data2, t, k, u):
     cod_vect = np.array([0. for i in range(t)], dtype=float)
     
     for i in range(t):
-        cod = codeviance_sketchmin(repartition1[i], repartition2[i])
+        cod = codeviance(repartition1[i], repartition2[i])
         cod_vect[i] = cod
     
     return min_vect(cod_vect)
@@ -37,7 +37,7 @@ def codeviance_two_streams(data1, data2, t, k, u):
     
 def codeviance_all_streams(DATA, eps, delta, u):
     """ DATA = array of steams
-    Return the codevianc matrix"""
+    Return the codevianc matrix """
     
     n = len(DATA)
     cod_matrix = np.array([[0. for i in range(n)] for j in range(n)], dtype=float)
@@ -52,3 +52,15 @@ def codeviance_all_streams(DATA, eps, delta, u):
             cod_matrix[j,i] = cod
     
     return cod_matrix
+    
+    
+def freq_vect(x,u):
+    """ Return the frequency vector or the list x
+    which values are integers between O and u """
+    X = np.array([0 for i in range(u+1)])
+    for e in x:
+        X[e] = X[e] + 1
+    return X
+        
+        
+        
