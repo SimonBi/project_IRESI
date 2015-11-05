@@ -1,7 +1,6 @@
 import extract_epahttp as t1
 import extract_sdschttp as t2
 import extract_calgaryaccess as t3
-from distribution import *
 
 
 def extract_entries(id_traces, random_entries=False, data=[]):
@@ -35,20 +34,28 @@ def extract_entries(id_traces, random_entries=False, data=[]):
     return various_information
 
 
-def generate_random_entries(size, nb_distinct, distribution):
-    """
-    Generate a random list of integers.
-    :param size: Size of the list.
-    :param nb_distinct: Number of distinct items.
-    :param distribution: Distribution in the list for each element.
-    :type distribution: Tuple or list, of the size of the number of distinct
-                        items, of numbers between 0 and 1.
-    :return: List of integers.
-    """
-    entries = []
-    for i in range(0, nb_distinct):
-        entries += [i] * (size / distribution[i])
+def extract_all_traces():
+    traces = [t1.extract_filename(), t2.extract_filenames('1'), t2.extract_filenames('2'), t3.extract_filename()]
+    distinct_elts = list(set([e for l in traces for e in l]))
+    bijection = {distinct_elts[i]: i for i in range(len(distinct_elts))}
+    entries = [[bijection[e] for e in l] for l in traces]
     return entries
+
+
+# def generate_random_entries(size, nb_distinct, distribution):
+#     """
+#     Generate a random list of integers.
+#     :param size: Size of the list.
+#     :param nb_distinct: Number of distinct items.
+#     :param distribution: Distribution in the list for each element.
+#     :type distribution: Tuple or list, of the size of the number of distinct
+#                         items, of numbers between 0 and 1.
+#     :return: List of integers.
+#     """
+#     entries = []
+#     for i in range(0, nb_distinct):
+#         entries += [i] * (size / distribution[i])
+#     return entries
     
 
-#print(extract_entries('1'))
+# print(extract_entries('1'))

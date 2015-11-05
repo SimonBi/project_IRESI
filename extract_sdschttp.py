@@ -15,3 +15,14 @@ def extract_sources(id_file):
             sources += [line.split(' ')[0][:-1]]
     return sources
 
+
+def extract_filenames(id_file):
+    filenames = []
+    if id_file == '1':
+        filename = '2sdschttp.txt'
+    else:
+        filename = '2sdschttp' + str(id_file) + '.txt'
+    with open('traces/traces/'+filename, encoding="latin-1") as logF:
+        for line in logF:
+            filenames += [line.split(' ')[6][1:][:-2]]
+    return filenames
