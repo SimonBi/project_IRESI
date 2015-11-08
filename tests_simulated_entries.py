@@ -1,4 +1,5 @@
 from computing import *
+from distribution import *
 from traces_extraction import *
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
