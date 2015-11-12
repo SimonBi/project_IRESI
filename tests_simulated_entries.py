@@ -1,8 +1,11 @@
 from computing import *
+from distribution import *
 from traces_extraction import *
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.mlab import griddata
+
+
 fig1 = plt.figure()
 ax1 = fig1.add_subplot(111, projection='3d')
 fig2 = plt.figure()
@@ -17,11 +20,11 @@ delta = 0.001
 print("Starting generation")
 
 data0 = entry_uniform(size, u)
-data1 = entry_zipfian(size, u,2)
-data2 = entry_zipfian(size, u,3)
-data3 = entry_zipfian(size, u,4)
-data4 = entry_zipfian(size, u,5)
-data5 = entry_zipfian(size, u,6)
+data1 = entry_zipfian(size, u, 2)
+data2 = entry_zipfian(size, u, 3)
+data3 = entry_zipfian(size, u, 4)
+data4 = entry_zipfian(size, u, 5)
+data5 = entry_zipfian(size, u, 6)
 data6 = entry_poisson(size, u, u/(2**1))
 data7 = entry_poisson(size, u, u/(2**2))
 data8 = entry_poisson(size, u, u/(2**3))
@@ -33,22 +36,22 @@ data12 = entry_negative_binomial(size, u, 0.42)
 print("Ending generation")
 
 
-## PRINT DISTRIBUTION
-
 def print_data(data):
+    """
+    Print distribution of a list.
+    :param data: List of integers.
+    """
     data_array = np.array([e for e in data])
     plt.hist(data_array)
     plt.show()
     return None
 
-#print_data(data0['elements'])
-
 
 DATA_elts = [globals()['data' + str(i)] for i in range(13)]
-DATA_freq = [freq_vect(DATA_elts[i],u+1) for i in range(13)]
+DATA_freq = [freq_vect(DATA_elts[i], u+1) for i in range(13)]
 
 
-## SKECH MIN RESULTS
+# SKECH MIN RESULTS
 
 print('Starting computing sketchmin codeviance matrix')
 
@@ -56,21 +59,21 @@ cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
 
 print('Ending computing sketchmin codeviance matrix')
 
-## REAL CODEVIANCE MATRIX
+# REAL CODEVIANCE MATRIX
 
 print('Starting computing accurate codeviance matrix')
 
 cod_real_matrix = np.array([[0. for i in range(13)] for j in range(13)], dtype=float)
 
 for i in range(13):
-        for j in range(i,13):
+        for j in range(i, 13):
             cod = codeviance(DATA_freq[i], DATA_freq[j])
-            cod_real_matrix[i,j] = cod
-            cod_real_matrix[j,i] = cod
+            cod_real_matrix[i, j] = cod
+            cod_real_matrix[j, i] = cod
 
 print('Ending computing accurate codeviance matrix')
 
-## PLOTTING in 3D
+# PLOTTING in 3D
 
 print('Starting plotting')
 
@@ -81,16 +84,10 @@ x = np.array([j for i in range(13) for j in range(13)])
 y = np.array([i for i in range(13) for j in range(13)])
 
 # Real
-z1 = np.array([cod_real_matrix[i,j] for i in range(13) for j in range(13)])
-#mini = min_vect(z1)
-#for k in range(169):
-#        z1[k] = np.log(z1[k] + abs(mini) + 1)
-        
+z1 = np.array([cod_real_matrix[i, j] for i in range(13) for j in range(13)])
+
 # Sketch min
-z2 = np.array([cod_matrix[i,j] for i in range(13) for j in range(13)])
-#mini = min_vect(z2)
-#for k in range(169):
-#        z2[k] = np.log(z2[k] + abs(mini) + 1)
+z2 = np.array([cod_matrix[i, j] for i in range(13) for j in range(13)])
 
 X, Y = np.meshgrid(Xi, Yi)
 

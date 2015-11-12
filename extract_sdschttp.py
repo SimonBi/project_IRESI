@@ -17,6 +17,10 @@ def extract_sources(id_file):
 
 
 def extract_filenames(id_file):
+    """
+    Extract the filenames of the requests and convert them into integers.
+    :return: List of integers.
+    """
     filenames = []
     if id_file == '1':
         filename = '2sdschttp.txt'

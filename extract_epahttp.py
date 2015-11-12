@@ -11,6 +11,10 @@ def extract_sources():
 
 
 def extract_filename():
+    """
+    Extract the filenames of the requests and convert them into integers.
+    :return: List of integers.
+    """
     filenames = []
     with open('traces/traces/1epahttp.txt') as logF:
         for line in logF:

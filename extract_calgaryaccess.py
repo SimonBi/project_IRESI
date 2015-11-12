@@ -13,7 +13,7 @@ def extract_sources():
 
 def extract_filename():
     """
-    Extract the filenames of the requests and convert them intro integers.
+    Extract the filenames of the requests and convert them into integers.
     :return: List of integers.
     """
     filenames = []

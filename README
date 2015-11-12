@@ -1,0 +1,16 @@
+==================== Project ====================
+Course: IRESI
+Authors: Simon Bihel, Florestan De Moor
+Institute: ENS Rennes, Computer Science Department
+
+==================== Structure of the program ====================
+
+
+
+==================== Run tests ====================
+
+    - Real traces
+Simply type :
+    $ python3 tests.py
+
+    - Randomly generated traces
