@@ -4,7 +4,7 @@ from codeviance import *
 
 def min_vect(l):
     """Return the minimum element of l"""
-    
+
     n = len(l)
     if n == 0:
         return "Error min"
@@ -26,7 +26,7 @@ def codeviance_two_streams(data1, data2, t, k, u):
     repartition1 = partition(data1, t, k, u, hash_f)
     repartition2 = partition(data2, t, k, u, hash_f)
     
-    cod_vect = np.array([0. for i in range(t)], dtype=float)
+    cod_vect = np.array([0. for _ in range(t)], dtype=float)
     
     for i in range(t):
         cod = codeviance(repartition1[i], repartition2[i])
@@ -36,28 +36,33 @@ def codeviance_two_streams(data1, data2, t, k, u):
     
     
 def codeviance_all_streams(DATA, eps, delta, u):
-    """ DATA = array of steams
-    Return the codevianc matrix """
+    """
+    Return the codeviance matrix
+    :param DATA: Array of streams.
+    """
     
     n = len(DATA)
-    cod_matrix = np.array([[0. for i in range(n)] for j in range(n)], dtype=float)
+    cod_matrix = np.array([[0. for _ in range(n)] for _ in range(n)], dtype=float)
     
-    t = int(np.ceil( np.log( 1 / delta ) ))
-    k = int( np.ceil(1 / eps))
+    t = int(np.ceil(np.log(1 / delta)))
+    k = int(np.ceil(1 / eps))
     
     for i in range(n):
-        for j in range(i,n):
+        for j in range(i, n):
             cod = codeviance_two_streams(DATA[i], DATA[j], t, k, u)
-            cod_matrix[i,j] = cod
-            cod_matrix[j,i] = cod
+            cod_matrix[i, j] = cod
+            cod_matrix[j, i] = cod
     
     return cod_matrix
     
     
-def freq_vect(x,u):
-    """ Return the frequency vector or the list x
-    which values are integers between O and u """
-    X = np.array([0 for i in range(u+1)])
+def freq_vect(x, u):
+    """
+    Return the frequency vector or the list x
+    which values are integers between O and u
+    :rtype: Array of integers.
+    """
+    X = np.array([0 for _ in range(u+1)])
     for e in x:
-        X[e] = X[e] + 1
+        X[e] += 1
     return X
