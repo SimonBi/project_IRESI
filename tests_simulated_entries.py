@@ -1,3 +1,7 @@
+"""
+Comparison between various random data traces and the SketchMin result.
+"""
+
 from computing import *
 from distribution import *
 from traces_extraction import *
@@ -12,9 +16,9 @@ fig2 = plt.figure()
 ax2 = fig2.add_subplot(111, projection='3d')
 
 
-size = 1000
-u = 10
-eps = 0.3
+size = 10000
+u = 100
+eps = 0.1
 delta = 0.001
 
 print("Starting generation")
@@ -51,7 +55,7 @@ DATA_elts = [globals()['data' + str(i)] for i in range(13)]
 DATA_freq = [freq_vect(DATA_elts[i], u+1) for i in range(13)]
 
 
-# SKECH MIN RESULTS
+# SKETCH MIN RESULTS
 
 print('Starting computing sketchmin codeviance matrix')
 
@@ -91,8 +95,8 @@ z2 = np.array([cod_matrix[i, j] for i in range(13) for j in range(13)])
 
 X, Y = np.meshgrid(Xi, Yi)
 
-Z1 = griddata(x, y, z1, X, Y)
-Z2 = griddata(x, y, z2, X, Y)
+Z1 = griddata(x, y, z1, X, Y, interp='linear')
+Z2 = griddata(x, y, z2, X, Y, interp='linear')
 
 ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1, color='g')
 ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1, color='r')
