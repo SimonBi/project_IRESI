@@ -61,6 +61,3 @@ def freq_vect(x,u):
     for e in x:
         X[e] = X[e] + 1
     return X
-        
-        
-        

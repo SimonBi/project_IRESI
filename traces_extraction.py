@@ -42,9 +42,11 @@ def extract_all_traces():
     the same IDs for similar items.
     :return: List of integers.
     """
-    traces = [t1.extract_filename(), t2.extract_filenames('1'), t2.extract_filenames('2'), t3.extract_filename()]
+    traces = [t1.extract_filename(), t2.extract_filenames('1'),
+              t2.extract_filenames('2'), t3.extract_filename()]
     distinct_elts = list(set([e for l in traces for e in l]))
+    max_elt = len(distinct_elts)-1
     bijection = {distinct_elts[i]: i for i in range(len(distinct_elts))}
     entries = [[bijection[e] for e in l] for l in traces]
-    return entries
+    return entries, max_elt
 
