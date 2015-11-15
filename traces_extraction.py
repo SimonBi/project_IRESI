@@ -49,4 +49,3 @@ def extract_all_traces():
     bijection = {distinct_elts[i]: i for i in range(len(distinct_elts))}
     entries = [[bijection[e] for e in l] for l in traces]
     return entries, max_elt
-

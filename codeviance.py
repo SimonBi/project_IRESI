@@ -1,28 +1,26 @@
-import numpy as np
-
-def average(X):
-    """Return the average of X"""
+def average(list_x):
+    """Return the average of list_x"""
     
     n = 0
-    S = 0
-    for e in X:
-        S = S + e
+    s = 0
+    for e in list_x:
+        s = s + e
         n += 1
-    return S / n
+    return s / n
 
 
-def codeviance(X, Y):
-    """Return the codeviance of X annd Y"""
+def codeviance(list_x, list_y):
+    """Return the codeviance of list_x and list_y"""
     
-    av_x = average(X)
-    av_y = average(Y)
-    return average(X*Y) - (av_x * av_y)
+    av_x = average(list_x)
+    av_y = average(list_y)
+    return average(list_x*list_y) - (av_x * av_y)
 
 
-def average_sketchmin(X):
+def average_sketchmin(list_x):
     n = 0
-    S = 0
-    for i in range(len(X)):
-        S = S + X[i]*i
-        n += X[i]
-    return S / n
+    s = 0
+    for i in range(len(list_x)):
+        s += list_x[i]*i
+        n += list_x[i]
+    return s / n

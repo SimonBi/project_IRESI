@@ -67,7 +67,8 @@ print('Ending computing sketchmin codeviance matrix')
 
 print('Starting computing accurate codeviance matrix')
 
-cod_real_matrix = np.array([[0. for i in range(13)] for j in range(13)], dtype=float)
+cod_real_matrix = np.array([[0. for i in range(13)] for j in range(13)],
+                           dtype=float)
 
 for i in range(13):
         for j in range(i, 13):

@@ -35,21 +35,22 @@ def codeviance_two_streams(data1, data2, t, k, u):
     return min_vect(cod_vect)
     
     
-def codeviance_all_streams(DATA, eps, delta, u):
+def codeviance_all_streams(data, eps, delta, u):
     """
     Return the codeviance matrix
-    :param DATA: Array of streams.
+    :param data: Array of streams.
     """
     
-    n = len(DATA)
-    cod_matrix = np.array([[0. for _ in range(n)] for _ in range(n)], dtype=float)
+    n = len(data)
+    cod_matrix = np.array([[0. for _ in range(n)] for _ in range(n)],
+                          dtype=float)
     
     t = int(np.ceil(np.log(1 / delta)))
     k = int(np.ceil(1 / eps))
     
     for i in range(n):
         for j in range(i, n):
-            cod = codeviance_two_streams(DATA[i], DATA[j], t, k, u)
+            cod = codeviance_two_streams(data[i], data[j], t, k, u)
             cod_matrix[i, j] = cod
             cod_matrix[j, i] = cod
     
@@ -62,7 +63,7 @@ def freq_vect(x, u):
     which values are integers between O and u
     :rtype: Array of integers.
     """
-    X = np.array([0 for _ in range(u+1)])
+    x_res = np.array([0 for _ in range(u+1)])
     for e in x:
-        X[e] += 1
-    return X
+        x_res[e] += 1
+    return x_res

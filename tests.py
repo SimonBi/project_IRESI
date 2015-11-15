@@ -18,8 +18,8 @@ ax2 = fig2.add_subplot(111, projection='3d')
 eps = 0.001
 delta = 0.001
 
-datas, u = extract_all_traces()
-nb_data = len(datas)
+data, u = extract_all_traces()
+nb_data = len(data)
 
 
 def print_data(d):
@@ -30,18 +30,16 @@ def print_data(d):
     data_array = np.array([e for e in d])
     plt.hist(data_array)
     plt.show()
-    return None
 
 
-DATA_elts = datas[:]
-DATA_freq = [freq_vect(DATA_elts[i], u+1) for i in range(nb_data)]
+DATA_freq = [freq_vect(data[i], u+1) for i in range(nb_data)]
 
 
 # SKETCH MIN RESULTS
 
 print('Starting computing sketchmin codeviance matrix')
 
-cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
+cod_matrix = codeviance_all_streams(data, eps, delta, u)
 
 print('Ending computing sketchmin codeviance matrix')
 

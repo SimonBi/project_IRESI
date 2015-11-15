@@ -3,6 +3,7 @@ Course: IRESI
 Authors: Simon Bihel, Florestan De Moor
 Institute: ENS Rennes, Computer Science Department
 
+
 ================================= Requirements =================================
 
 We used python3 along with the libraries matplotlib and numpy for this project.
@@ -13,11 +14,7 @@ On Ubuntu, the option "interp='linear" for griddata might not work, removing it
 may make it work.
 
 
-========================== Structure of the program ===========================
-
-
-
-================================== Run tests ==================================
+================================== Run tests ===================================
 
     - Real traces
 Simply type :
