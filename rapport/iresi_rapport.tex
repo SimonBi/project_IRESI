@@ -17,6 +17,10 @@
 \usepackage{subcaption}
 \usepackage{float}  % H option for figures
 
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Cod}{Cod}
+\newcommand{\CodSk}{\overset{\sim}{\Cod}}
+
 
 \begin{document}
 
@@ -48,6 +52,36 @@ Translate if needed to integers. ??? Could be repetitive with subsection Real da
 
 \subsection{Computing the codeviance}
 % Florestan
+
+\paragraph{}First, we implemented two functions to compute the average, and covariance of an array. To do this, we browse the array, and use the following formulas :
+	\[ \E(X) = \frac{1}{|X|} \sum\limits_{x_i \in X} x_i \]
+	\[ \Cod(X,Y) = \E(XY) - \E(X)\E(Y) \]
+	
+\paragraph{}We have in entry a data trace $D$, and precision parameters $(\varepsilon, \delta)$. We start by defining the following constants :
+	\[ k =\left\lceil \frac{1}{\varepsilon} \right\rceil \]
+$k$ is the number of partitions we will create.
+	\[ t = \left\lceil \log(\frac{1}{\delta}) \right\rceil \]
+$t$ is the number of hashing functions we will consider.
+	
+\paragraph{}The data trace has integers values which stand between $0$ and $u$. We have to define $t$ universal hashing functions $h_i$ :
+	\[ h_i(x) = ((a_ix+b_i) \mod u) \mod k \quad \forall i \in \lbrace 1 \ldots t \rbrace \]
+where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_i$, and $\lbrace 0 \ldots t-1 \rbrace$ for $b_i$.
+
+\paragraph{}We can then create the partitions, and we get a matrix $R_{0 \leq i \leq t-1, 1 \leq j \leq k}$ where 
+ 	\[ R_{i,j} = \# \lbrace x \in D : h_i(x) = j \rbrace \]
+ 	
+\paragraph{}We can now create a function that receive two data traces. It calculates the $D$ matrix for both trace, and then computes the codeviance :
+	\[ \CodSk(D_1, D_2) = \underset{0 \leq i \leq t-1}{\min} \Cod(R_1[i], R_2[i]) \]
+where $R[i]$ is the line $i$ of the matrix.
+
+\paragraph{}We can then create the full codeviance matrix $C_{1 \leq i,j \leq p}$ when we have $p$ data traces :
+	\[ C_{i,j} = \CodSk(D_i, D_j) \quad \forall i,j \in \lbrace 1 \ldots p \rbrace \]
+
+
+
+
+
+
 
 \section{Experimental results}
 % mini intro 2l
