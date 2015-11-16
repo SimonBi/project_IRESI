@@ -90,10 +90,26 @@ To evaluate the correctness of the algorithm, we just need to see if the results
 % Simon
 Extracting all at once to maybe find correlation, even after applying the bijection. Extracting the file-names cause the third kind of traces was unusable if we wanted to analyze the sources, as it only says if an internal or external request.
 
+
+% Just giving the parameters and putting the screenshots
+
+\begin{itemize}
+	\item $\varepsilon = 0.001$
+	\item $\delta = 0.001$
+\end{itemize}
+
+\begin{figure}[!h]
+	\center
+	\includegraphics[scale=0.35]{realtests_real1.png}
+	\includegraphics[scale=0.35]{realtests_sketchmin1.png}
+	\caption{Codeviance matrix of real data traces: \\real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
+\end{figure}
+
+
 \subsection{Generated data traces}
 % Florestan
 
-We generated artificial data traces using some probabilistic law. Here are the parameters of this experiment :
+We generated artificial data traces using some probabilistic laws. Here are the parameters of this experiment :
 \begin{itemize}
 	\item size of the traces : $size = 10 000$
 	\item integers values are generated between $0$ and $u = 100$
@@ -101,31 +117,37 @@ We generated artificial data traces using some probabilistic law. Here are the p
 	\item $\delta = 0.001$
 \end{itemize}
 
-\begin{itemize}
-	\item Trace 0 : Uniform
-	\item Trace 1 : Zipfian ($\alpha = 2$)
-	\item Trace 2 : Zipfian ($\alpha = 3$)
-	\item Trace 3 : Zipfian ($\alpha = 4$)
-	\item Trace 4 : Zipfian ($\alpha = 5$)
-	\item Trace 5 : Zipfian ($\alpha = 6$)
-	\item Trace 6 : Poisson ($\lambda = u/(2)$)
-	\item Trace 7 : Poisson ($\lambda = u/(2^2)$)
-	\item Trace 8 : Poisson ($\lambda = u/(2^3)$)
-	\item Trace 9 : Poisson ($\lambda = u/(2^4)$)
-	\item Trace 10 : Poisson ($\lambda = u/(2^5)$)
-	\item Trace 11 : Binomial ($p = 0.42$)
-	\item Trace 12 : Negative Binomial ($p = 0.42$)
-\end{itemize}
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & Probabilistic laws & Parameters \\
+		 \hline
+		Trace 0 & Uniform & \\
+		Trace 1 & Zipfian & $\alpha = 2$ \\
+		Trace 2 & Zipfian & $\alpha = 3$ \\
+		Trace 3 & Zipfian & $\alpha = 4$ \\
+		Trace 4 & Zipfian & $\alpha = 5$ \\ 
+		Trace 5 & Zipfian & $\alpha = 6$ \\
+		Trace 6 & Poisson & $\lambda = u/(2)$ \\
+		Trace 7 & Poisson & $\lambda = u/(2^2)$ \\
+		Trace 8 & Poisson & $\lambda = u/(2^3)$ \\
+		Trace 9 & Poisson & $\lambda = u/(2^4)$ \\
+		Trace 10 & Poisson & $\lambda = u/(2^5)$ \\
+		Trace 11 & Binomial & $p = 0.42$ \\
+		Trace 12 & Negative Binomial & $p = 0.42$ \\
+		\hline
+	\end{tabular}
+\end{center}
 
-We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} algorithm. Here are below the results we got.
 
-\begin{figure}
+We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} algorithm. Here are below the results we got. We can notice that the two shapes are really similar.
+
+\begin{figure}[!h]
 	\center
-	%\includegraphics[scale=0.5]{generated_sk.png}
-	%\includegraphics[scale=0.5]{generated_real.png}
-	%\caption
+	\includegraphics[scale=0.23]{generated_real.png}
+	\includegraphics[scale=0.23]{generated_sk.png}
+	\caption{Codeviance matrix of generated data traces:\\real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
 \end{figure}
-
 
 
 \section*{Conclusion}
