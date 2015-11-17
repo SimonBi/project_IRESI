@@ -48,12 +48,16 @@ For the detection we need to first select the entries to then apply the algorith
 
 \subsection{Extracting information from data traces}
 % Simon
-Translate if needed to integers. ??? Could be repetitive with subsection Real data traces.
+%Translate if needed to integers. Extract all at once to find correlation ??? Could be repetitive with subsection Real data traces.
+
+To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of the distinct elements and the converting each element of the original list to the its index in the distinct elements list.
+
+This process has to be extended to the extraction of multiple traces in a single time because what we want in the end is eventually find correlation between multiple traces. To do that the distinct elements list has just to be shared between the multiple extractions.
 
 \subsection{Computing the codeviance}
 % Florestan
-
-\paragraph{}First, we implemented two functions to compute the average, and covariance of an array. To do this, we browse the array, and use the following formulas :
+%\paragraph{}
+First, we implemented two functions to compute the average, and covariance of an array. To do this, we browse the array, and use the following formulas :
 	\[ \E(X) = \frac{1}{|X|} \sum\limits_{x_i \in X} x_i \]
 	\[ \Cod(X,Y) = \E(XY) - \E(X)\E(Y) \]
 	
@@ -88,9 +92,11 @@ To evaluate the correctness of the algorithm, we just need to see if the results
 
 \subsection{Real data traces}
 % Simon
-Extracting all at once to maybe find correlation, even after applying the bijection. Extracting the file-names cause the third kind of traces was unusable if we wanted to analyze the sources, as it only says if an internal or external request.
+% Extracting all at once to maybe find correlation, even after applying the bijection. Extracting the file-names cause the third kind of traces was unusable if we wanted to analyze the sources, as it only says if an internal or external request.
 
+For the real traces, we used the file-names as entries for the algorithm, after converting them to integer by simply matching the index of the distinct elements. We used file-names because the calgaryaccess traces didn't really have an entry for the sources of the requests, and we wanted a consistent information extraction over the multiple traces to eventually find correlations.
 
+Here are the rest of the parameters for the experiment :
 % Just giving the parameters and putting the screenshots
 
 \begin{itemize}
@@ -98,11 +104,14 @@ Extracting all at once to maybe find correlation, even after applying the biject
 	\item $\delta = 0.001$
 \end{itemize}
 
-\begin{figure}[!h]
-	\center
+In the figure~\ref{ref:exp_real} we can see the result of the experiment where the result of the algorithm is close to the original.
+
+\begin{figure}[H]
+	\centering
 	\includegraphics[scale=0.35]{realtests_real1.png}
 	\includegraphics[scale=0.35]{realtests_sketchmin1.png}
-	\caption{Codeviance matrix of real data traces: \\real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
+	\caption{Codeviance matrix of real data traces: \\ real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
+	\label{ref:exp_real}
 \end{figure}
 
 
@@ -140,13 +149,14 @@ We generated artificial data traces using some probabilistic laws. Here are the 
 \end{center}
 
 
-We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} algorithm. Here are below the results we got. We can notice that the two shapes are really similar.
+We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} algorithm. Here are the results we got in figure~\ref{ref:exp_artificial} below. We can notice that the two shapes are really similar.
 
-\begin{figure}[!h]
-	\center
+\begin{figure}[H]
+	\centering
 	\includegraphics[scale=0.23]{generated_real.png}
 	\includegraphics[scale=0.23]{generated_sk.png}
 	\caption{Codeviance matrix of generated data traces:\\real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
+	\label{ref:exp_artificial}
 \end{figure}
 
 
