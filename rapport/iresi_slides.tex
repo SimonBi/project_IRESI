@@ -6,6 +6,11 @@
 \usepackage{graphicx}
 \usepackage[english]{babel}
 
+\usepackage{xcolor,colortbl}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
 \usepackage{float}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -37,12 +42,88 @@
 	
 \section{DDoS}
 
-	\begin{frame}
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection]
+	\end{frame}
+
+	\begin{frame}{Simple attack}
+	
+\begin{block}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.cm]
+
+  \node (A){\includegraphics[scale=0.2]{computer.png}};
+  \node (B) [right of=A] {\includegraphics[scale=0.1]{router.png}};
+  \node (C) [right of=B] {\includegraphics[scale=0.2]{server.png}};
+
+  \path
+(A) edge [draw=red, line width=0.5mm] node {Packets} (B)
+(B) edge [draw=purple, line width=0.5mm] node {} (C);
+
+\end{tikzpicture}
+\end{center}
+
+\end{block}
+	
+	\end{frame}
+	
+	\begin{frame}{DDoS attack}
+	
+\begin{block}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto]
+
+\node (A){\includegraphics[scale=0.2]{computer.png}};
+\node (B) [right of=A, node distance=4.cm] {\includegraphics[scale=0.1]{router.png}};
+\node (C) [right of=B, node distance=4.cm] {\includegraphics[scale=0.2]{server.png}};
+\node (D) [below of=A, node distance=2.3cm]{\includegraphics[scale=0.2]{computer.png}};
+\node (E) [above of=A, node distance=2.3cm]{\includegraphics[scale=0.2]{computer.png}};
+
+  \path
+(A) edge [draw=red, line width=0.5mm] node {Packets} (B)
+(D) edge [draw=red, line width=0.5mm] node {Packets} (B)
+(E) edge [draw=red, line width=0.5mm] node {Packets} (B)
+(B) edge [draw=purple, line width=1.5mm] node {} (C);
+
+\end{tikzpicture}
+\end{center}
+
+\end{block}
+	
+	\end{frame}
+	
+	\begin{frame}{Computing a correlation indicator}
+	
+	\begin{center}
+		\textbf{2 DATA STREAMS}
+	\end{center}
+	
+	\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+	~ & ~ & \cellcolor{purple}~ & ~ & \cellcolor{purple}~ & ~ & ~ & \cellcolor{purple}~ & ~ & ~ & \cellcolor{purple}~ & ~ & ~ & ~ & ~ & ~ & ~ &\cellcolor{purple}~ & ~ & ~ \\
+	\hline
+	\end{tabular}\end{center}
+	
+	\begin{center}\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+	\cellcolor{purple}~ & ~ & ~ & ~ & \cellcolor{purple}~ & ~ & \cellcolor{purple}~ & ~ & ~ & ~ & \cellcolor{purple}~ & ~ & ~ & ~ & \cellcolor{purple}~ & ~ & ~ & ~ & \cellcolor{purple}~ & ~ \\
+	\hline
+	\end{tabular}\end{center}
+	
+	\begin{alertblock}{Codeviance $\longrightarrow$ \texttt{if} High correlation \texttt{then} DDoS attack ongoing}
+	\end{alertblock}
+	
 	
 	\end{frame}
 	
 
 \section{Programming the algorithm}
+
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection]
+	\end{frame}
 
 	\begin{frame}
 	
@@ -50,6 +131,10 @@
 	
 	
 \section{Experimental results}
+
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection]
+	\end{frame}
 
 	\begin{frame}{Real data traces}
 		
