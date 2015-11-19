@@ -51,10 +51,85 @@
 	
 \section{Experimental results}
 
-	\begin{frame}
-	
+	\begin{frame}{Real data traces}
+		
+	\begin{center}
+		\begin{block}{Codeviance matrix of real data traces}
+		\end{block}
+		\begin{tabular}{cc}
+			\includegraphics[scale=0.26]{realtests_real1.png} &
+			\includegraphics[scale=0.26]{realtests_sketchmin1.png} \\
+			Exact codeviance & \texttt{SketchMin} algorithm \\
+		\end{tabular}
+	\end{center}
+		
 	\end{frame}
 	
+	\begin{frame}{Generated data traces}
+		\footnotesize
+	
+		\begin{block}{~}
+		
+		\center
+		\begin{tabular}{c|c|c|c}
+			size & interval $\left[0, u \right]$ & $\varepsilon$ & $\delta$ \\
+			\hline
+			$10~000$ & $u = 100$ & $0.1$ & $0.001$ \\
+		\end{tabular}
+		
+		\end{block}
+		
+		\begin{center}
+		\footnotesize
+		
+		\begin{tabular}{cc}
+		
+			\begin{tabular}{c}
+				\includegraphics[scale=0.17]{poisson2.png}\\
+				\text{\scriptsize Histogram of trace 7} \\
+			\end{tabular}
+			
+		&
+
+		
+		\begin{tabular}{|c|c|c|}
+			\hline
+			 & Probabilistic laws & Parameters \\
+			 \hline
+			Trace 0 & Uniform & \\
+			Trace 1 & Zipfian & $\alpha = 2$ \\
+			Trace 2 & Zipfian & $\alpha = 3$ \\
+			Trace 3 & Zipfian & $\alpha = 4$ \\
+			Trace 4 & Zipfian & $\alpha = 5$ \\ 
+			Trace 5 & Zipfian & $\alpha = 6$ \\
+			Trace 6 & Poisson & $\lambda = u/(2)$ \\
+			Trace 7 & Poisson & $\lambda = u/(2^2)$ \\
+			Trace 8 & Poisson & $\lambda = u/(2^3)$ \\
+			Trace 9 & Poisson & $\lambda = u/(2^4)$ \\
+			Trace 10 & Poisson & $\lambda = u/(2^5)$ \\
+			Trace 11 & Binomial & $p = 0.42$ \\
+			Trace 12 & Negative Binomial & $p = 0.42$ \\
+			\hline
+		\end{tabular}
+		
+		\end{tabular}
+		
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}{Generated data traces}
+	
+	\begin{center}
+		\begin{block}{Codeviance matrix of generated data traces}
+		\end{block}
+		\begin{tabular}{cc}
+			\includegraphics[scale=0.16]{generated_real.png} &
+			\includegraphics[scale=0.16]{generated_sk.png} \\
+			Exact codeviance & \texttt{SketchMin} algorithm \\
+		\end{tabular}
+	\end{center}
+		
+	\end{frame}
 
 \section*{Conclusion}
 
