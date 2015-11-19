@@ -43,7 +43,7 @@
 
 \paragraph{}That's why the following method was implemented : the router receives different data streams, and calculates for each peer a correlation indicator which is the codeviance of the frequency vectors corresponding to the streams. The codeviance formulas are presented below in section \textbf{2.2}. Once this was computed, it becomes possible to determine if an attack is happening or not, by analyzing the codeviance values.
 
-\paragraph{}Nevertheless, the stream sizes are huge, we can't afford to calculate the precise codeviance. The \texttt{SketchMin} algorithm is an easier way to calculate an estimated codeviance using hash functions in which precision is controlled by a set of paramaters ($\varepsilon, \delta)$. We will present in next section how we implemented it using Python 3 language. We will then compare its results with exact value in section \textbf{3}, by running it with real and generated data traces.
+\paragraph{}Nevertheless, the stream sizes are huge, we can't afford to calculate the precise codeviance. The \texttt{SketchMin} algorithm is an easier way to calculate an estimated codeviance using hash functions in which precision is controlled by a set of paramaters ($\varepsilon, \delta)$. We will present in next section how we implemented it using Python 3 language. We will then compare its results with exact values in section \textbf{3}, by running it with real and generated data traces.
 
 
 \section{Programming the SketchMin algorithm}
