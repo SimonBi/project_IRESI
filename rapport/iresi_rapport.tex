@@ -39,11 +39,11 @@
 
 \section{DDoS and server security}
 
-\paragraph{}A DDoS (Distributed Denial of Service) attack is nowadays a well-known issue : it consists of sending a huge number of requests to a server, so that to make it crash, and therefore to make it unavailable for the other users. The requests are sent to the server by the router, which receives data streams. If the attack is concentrated in a single stream, it is easy do detect it. However, if the attack is scattered among several streams, it is much more difficult to detect it.
+A DDoS (Distributed Denial of Service) attack is nowadays a well-known issue : it consists of sending a huge number of requests to a server, so that it crashes, and therefore to make it unavailable for the other users. The requests are sent to the server by the router, which receives data streams. If the attack is concentrated in a single stream, it is easy do detect it. However, if the attack is scattered among several streams, it is much more difficult to detect it.
 
 \paragraph{}That's why the following method was implemented : the router receives different data streams, and calculates for each peer a correlation indicator which is the codeviance of the frequency vectors corresponding to the streams. The codeviance formulas are presented below in section \textbf{2.2}. Once this was computed, it becomes possible to determine if an attack is happening or not, by analyzing the codeviance values.
 
-\paragraph{}Nevertheless, the stream sizes are huge, we can't afford to calculate the precise codeviance. The \texttt{SketchMin} algorithm is an easier way to calculate an estimated codeviance using hash functions in which precision is controlled by a set of paramaters ($\varepsilon, \delta)$. We will present in next section how we implemented it using Python 3 language. We will then compare its results with exact values in section \textbf{3}, by running it with real and generated data traces.
+\paragraph{}Nevertheless, the stream sizes are huge, we can't afford to calculate the precise codeviance. The \texttt{SketchMin} algorithm is an easier way to calculate an estimated codeviance using hash functions in which precision is controlled by a set of parameters ($\varepsilon, \delta)$. We will present in next section how we implemented it using the Python 3 language. We will then compare its results with exact values in section \textbf{3}, by running it with real and randomly generated data traces.
 
 
 \section{Programming the SketchMin algorithm}
@@ -54,13 +54,13 @@ For the detection we need to first select the entries to then apply the algorith
 % Simon
 %Translate if needed to integers. Extract all at once to find correlation ??? Could be repetitive with subsection Real data traces.
 
-\paragraph{}To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of the distinct elements and the converting each element of the original list to the its index in the distinct elements list.
+In data traces, each line correspond to a request made to the server. To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of the distinct elements and the converting each element of the original list to the its index in the distinct elements list.
 
-\paragraph{}This process has to be extended to the extraction of multiple traces in a single time because what we want in the end is eventually find correlation between multiple traces. To do that the distinct elements list has just to be shared between the multiple extractions.
+\paragraph{}This process has to be extended to the extraction of multiple traces in a single time because what we want in the end is eventually find correlation between multiple traces. To do that the distinct elements list has just to be shared between the multiple extractions. And so, identical requests can be correlated after applying the \texttt{SketchMin} algorithm and act in reaction.
 
 \subsection{Computing the codeviance}
 % Florestan
-\paragraph{}First, we implemented two functions to compute the average, and codeviance of an array. To do this, we browse the array, and use the following formulas :
+First, we implemented two functions to compute the average, and codeviance of an array. To do this, we browse the array, and use the following formulas :
 	\[ \E(X) = \frac{1}{|X|} \sum\limits_{x_i \in X} x_i \]
 	\[ \Cod(X,Y) = \E(XY) - \E(X)\E(Y) \]
 	
@@ -167,6 +167,9 @@ We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} 
 
 \section*{Conclusion}
 % Simon / Florestan
+% results look like exact entries
+% what next ? -> find the right parameter to detect a false (=vicious) pike of activity
+% what next ? -> put in concurrency the seperate codeviance computings
 
 \clearpage
 
