@@ -17,7 +17,7 @@ def codeviance(list_x, list_y):
     
     av_x = average(list_x)
     av_y = average(list_y)
-    return average(list_x*list_y) - (av_x * av_y)
+    return abs(average(list_x*list_y) - (av_x * av_y))
 
 
 def stdev(list_x):
