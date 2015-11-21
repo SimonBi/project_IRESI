@@ -139,9 +139,9 @@
 	
 	\subsection{Computing the codeviance}
 	
-	\begin{frame}{Computing the codeviance}
+	\begin{frame}{Hashing functions}
 	
-	\begin{block}{Hashing functions}
+	\begin{block}{}
 	The data trace has integers values which stand between $0$ and $u$. We have to define $t$ universal hashing functions $h_i$ :
 	\[ h_i(x) = ((a_ix+b_i) \mod u) \mod k \quad \forall i \in \lbrace 1 \ldots t \rbrace \]
 where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_i$, and $\lbrace 0 \ldots t-1 \rbrace$ for $b_i$
@@ -164,6 +164,28 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 	
 	\end{exampleblock}
 
+	\end{frame}
+	
+	\begin{frame}{Using Python 3 language}
+	
+	\begin{center}
+		\begin{tikzpicture}[-,>=stealth',shorten >=1pt,auto]
+
+	\node (A) {\includegraphics[scale=0.4]{python.png}};
+	\node (B) [above left of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline \texttt{Matplotlib}, \texttt{Numpy}\\ \hline \end{tabular}};
+	\node (C) [above right of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline Reading files\\ \hline \end{tabular}};
+	\node (D) [below left of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline Easy syntax\\ \hline \end{tabular}};
+	\node (E) [below right of=A, node distance=3.5cm]{\begin{tabular}{|c|}\hline Library modules written in C\\ \hline \end{tabular}};
+
+	\path
+	
+	(B) edge [draw=yellow, line width=0.5mm] node {} (A)
+	(C) edge [draw=yellow, line width=0.5mm] node {} (A)
+	(D) edge [draw=yellow, line width=0.5mm] node {} (A)
+	(E) edge [draw=yellow, line width=0.5mm] node {} (A);
+
+		\end{tikzpicture}
+	\end{center}		
 	
 	\end{frame}
 	
