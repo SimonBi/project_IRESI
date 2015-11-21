@@ -131,10 +131,17 @@
 
 	\subsection{Extraction}
 	
-	\begin{frame}{Extraction}
+	\begin{frame}{Extraction on data traces}
 		% choosed python cause of its fast development time, also the more convenient based on the languages we know
 		% explain how we extract and transform them into entries to the algorithm ?
 		% numpy/matplotlib ?
+		\begin{block}{}
+			\begin{itemize}
+				\item Pick an entry on each line (=request), like the source or file requested ;
+				\item convert them to integers using an injective function ;
+				\item if multiple traces, extract all at once to keep correlation.
+			\end{itemize}
+		\end{block}
 	\end{frame}
 	
 	\subsection{Computing the codeviance}
@@ -305,7 +312,17 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 \section*{Conclusion}
 
 	\begin{frame}
-	
+		\begin{block}{}
+			Algorithm results look the same as the exact entries, on a different scale. Can use the same method to detect attack on exact traces.
+		\end{block}
+		
+		\begin{block}{Improvements}
+			\begin{itemize}
+				\item Work on flows of data traces instead of only one complete trace ;
+				\item put in concurrency the hashing functions computations	;
+				\item find a way of detecting attacks without false-detection.
+			\end{itemize}
+		\end{block}
 	\end{frame}
 
 
