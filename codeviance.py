@@ -17,9 +17,9 @@ def codeviance(list_x, list_y):
     
     av_x = average(list_x)
     av_y = average(list_y)
-    return abs(average(list_x*list_y) - (av_x * av_y))
+    return average(list_x*list_y) - (av_x * av_y)
 
 
 def stdev(list_x):
     """ Return tje standard deviation of list_x"""
-    return sqrt(codeviance(list_x, list_x))
+    return sqrt(abs(codeviance(list_x, list_x)))
