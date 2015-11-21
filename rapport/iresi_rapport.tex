@@ -170,10 +170,19 @@ In the figure~\ref{ref:exp_real} we can see the result of the experiment where t
 
 \begin{figure}[H]
 	\center
-	\includegraphics[scale=0.35]{realtests_real1.png}
-	\includegraphics[scale=0.35]{realtests_sketchmin1.png}
+	\includegraphics[scale=0.23]{realtests10times_real1.png}
+	\includegraphics[scale=0.23]{realtests10times_sketchmin1.png}
 	\caption{\footnotesize Codeviance matrix of real data traces: \\ real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
 	\label{ref:exp_real}
+\end{figure}
+
+\paragraph{}The red chart is not exactly the result given by the algorithm. In fact, it is the average result over 10 runs of the algorithm. It is important to make several runs, and to consider the average because we use hashing functions that are randomly generated. The standard deviation of this experiment is given by the following chart (which was not plotted in logarithmic scale).
+
+\begin{figure}[H]
+	\center
+	\includegraphics[scale=0.25]{realtests10times.png}
+	\caption{\footnotesize Standard deviation for 10 calculations of the \texttt{SketchMin} algorithm}
+	\label{ref:exp_real_stdev}
 \end{figure}
 
 
@@ -216,21 +225,31 @@ We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.23]{generated_real.png}
-	\includegraphics[scale=0.23]{generated_sk.png}
+	\includegraphics[scale=0.22]{generated10times_real.png}
+	\includegraphics[scale=0.22]{generated10times_sketchmin.png}
 	\caption{\footnotesize Codeviance matrix of generated data traces:\\real one (green) - calculated with \texttt{SketchMin} algorithm (red)}
 	\label{ref:exp_artificial}
 \end{figure}
 
+\paragraph{}The red chart is also an average over 10 runs, here is the standard deviation of this experiment :
+
+\begin{figure}[H]
+	\center
+	\includegraphics[scale=0.25]{generated10times.png}
+	\caption{\footnotesize Standard deviation for 10 calculations of the \texttt{SketchMin} algorithm}
+	\label{ref:exp_artificial_stdev}
+\end{figure}
+
 
 \section*{Conclusion}
-% TODO
-% Simon / Florestan
-% results look like exact entries
-% what next ? -> find the right parameter to detect a false (=vicious) pike of activity, empirical learning
-% what next ? -> put in concurrency the seperate codeviance computings
-% chat next ? -> only calculating on a total trace, what about a moving window -> from slide 57 of CM3, with buffers
-In the end the results of the algorithm seem to match the exact entries, with a difference of scale. This isn't problematic because if the detection of attacks rely on some kind of bound then it just has to be increased accordingly. However, our program isn't applicable to a real application because we still have to put in concurrency the separate codeviance computations as well as not working on a full trace but more on flows of traces.
+
+In the end the results of the algorithm seem to match the exact entries, with a difference of scale. That's why the \texttt{Sketchmin} algorithm seems to be an efficient way to calculate the codeviance of huge-sized data traces.
+
+\paragraph{}However, our program isn't applicable to a real application because we were here only considering a static data stream. But in reality, we have to apply this to moving streams, and so to determine when to drop data. Considering several-months-old data does not seem very wise. The next step would be to deal with this. Several algorithms exist, using buffers.
+
+\paragraph{}It is also possible to improve the time complexity of our program. We used only sequential programming, but it would be better to use parallel programming, especially because the computations related to a hashing function are independent from those related to another hashing function.
+
+\paragraph{}Finally, we programmed a procedure to calculate the codeviance matrix of several data streams. But, in order to use this information, it is necessary to make empirical learning, so as to become able to tell when an attack is happening, according to the valued calculated.
 
 
 \clearpage
