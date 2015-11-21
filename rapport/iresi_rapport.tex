@@ -230,6 +230,8 @@ We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} 
 % what next ? -> find the right parameter to detect a false (=vicious) pike of activity, empirical learning
 % what next ? -> put in concurrency the seperate codeviance computings
 % chat next ? -> only calculating on a total trace, what about a moving window -> from slide 57 of CM3, with buffers
+In the end the results of the algorithm seem to match the exact entries, with a difference of scale. This isn't problematic because if the detection of attacks rely on some kind of bound then it just has to be increased accordingly. However, our program isn't applicable to a real application because we still have to put in concurrency the separate codeviance computations as well as not working on a full trace but more on flows of traces.
+
 
 \clearpage
 
