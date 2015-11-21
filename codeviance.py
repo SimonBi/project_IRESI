@@ -1,5 +1,6 @@
 from math import sqrt
 
+
 def average(list_x):
     """Return the average of list_x"""
     
@@ -11,14 +12,12 @@ def average(list_x):
     return s / n
 
 
-
 def codeviance(list_x, list_y):
     """Return the codeviance of list_x and list_y"""
     
     av_x = average(list_x)
     av_y = average(list_y)
-    return average(list_x*list_y) - (av_x * av_y)
-
+    return abs(average(list_x*list_y) - (av_x * av_y))
 
 
 def stdev(list_x):

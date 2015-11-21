@@ -51,11 +51,11 @@ for k in range(nb_tests):
     cod_matrix = codeviance_all_streams(data, eps, delta, u)
     for i in range(nb_data):
         for j in range(nb_data):
-            cod_full_matrix[i,j,k] = cod_matrix[i,j]
-cod_matrix = np.array([[average(cod_full_matrix[i,j]) for i in range(nb_data)]
-                            for j in range(nb_data)], dtype=float)
-stdev_matrix = np.array([[stdev(cod_full_matrix[i,j]) for i in range(nb_data)]
-                            for j in range(nb_data)], dtype=float)
+            cod_full_matrix[i, j, k] = cod_matrix[i, j]
+cod_matrix = np.array([[average(cod_full_matrix[i, j]) for i in range(nb_data)]
+                      for j in range(nb_data)], dtype=float)
+stdev_matrix = np.array([[stdev(cod_full_matrix[i, j]) for i in range(nb_data)]
+                        for j in range(nb_data)], dtype=float)
 
 
 print('Ending computing sketchmin codeviance matrix')

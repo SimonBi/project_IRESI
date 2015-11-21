@@ -4,7 +4,6 @@ Comparison between various random data traces and the SketchMin result.
 
 from computing import *
 from distribution import *
-from traces_extraction import *
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.mlab import griddata
@@ -70,13 +69,13 @@ for k in range(nb_tests):
     cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
     for i in range(13):
         for j in range(13):
-            cod_full_matrix[i,j,k] = cod_matrix[i,j]
+            cod_full_matrix[i, j, k] = cod_matrix[i, j]
             
-cod_matrix = np.array([[average(cod_full_matrix[i,j]) for i in range(13)]
-                            for j in range(13)], dtype=float)
+cod_matrix = np.array([[average(cod_full_matrix[i, j]) for i in range(13)]
+                      for j in range(13)], dtype=float)
                             
-stdev_matrix = np.array([[stdev(cod_full_matrix[i,j]) for i in range(13)]
-                            for j in range(13)], dtype=float)
+stdev_matrix = np.array([[stdev(cod_full_matrix[i, j]) for i in range(13)]
+                        for j in range(13)], dtype=float)
 
 print('Ending computing sketchmin codeviance matrix')
 
@@ -116,13 +115,9 @@ z3 = np.array([stdev_matrix[i, j] for i in range(13) for j in range(13)])
                
 X, Y = np.meshgrid(Xi, Yi)
 
-#Z1 = griddata(x, y, z1, X, Y, interp='linear')
-#Z2 = griddata(x, y, z2, X, Y, interp='linear')
-#Z3 = griddata(x, y, z3, X, Y, interp='linear')
-
-Z1 = griddata(x, y, z1, X, Y)
-Z2 = griddata(x, y, z2, X, Y)
-Z3 = griddata(x, y, z3, X, Y)
+Z1 = griddata(x, y, z1, X, Y, interp='linear')
+Z2 = griddata(x, y, z2, X, Y, interp='linear')
+Z3 = griddata(x, y, z3, X, Y, interp='linear')
 
 ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1, color='g')
 ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1, color='r')
