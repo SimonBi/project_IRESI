@@ -129,18 +129,42 @@
 		\tableofcontents[currentsection]
 	\end{frame}
 
-	\subsection{}
-
-	\begin{frame}
+	\subsection{Extraction}
 	
-	
-	
-	\end{frame}		
-	
-	\begin{frame}
+	\begin{frame}{Extraction}
 		% choosed python cause of its fast development time, also the more convenient based on the languages we know
 		% explain how we extract and transform them into entries to the algorithm ?
 		% numpy/matplotlib ?
+	\end{frame}
+	
+	\subsection{Computing the codeviance}
+	
+	\begin{frame}{Computing the codeviance}
+	
+	\begin{block}{Hashing functions}
+	The data trace has integers values which stand between $0$ and $u$. We have to define $t$ universal hashing functions $h_i$ :
+	\[ h_i(x) = ((a_ix+b_i) \mod u) \mod k \quad \forall i \in \lbrace 1 \ldots t \rbrace \]
+where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_i$, and $\lbrace 0 \ldots t-1 \rbrace$ for $b_i$
+	\end{block}
+	
+	\end{frame}
+	
+	\begin{frame}{Hashing functions}
+	
+	\begin{exampleblock}{Example}
+	We generated a random data trace of size $10~000$, in $\left[0, u = 100\right]$ following a law of Poisson ($\lambda = u/2^4$). With $t=7$, $k=20$, $a=6$, $b=2$, here is the result :
+	
+	\begin{center}
+	\begin{tabular}{cc}
+		\includegraphics[scale=0.25]{poisson4.png} &
+		\includegraphics[scale=0.25]{poisson4_hashed.png} \\
+		Raw data trace & Hashed data trace \\
+	\end{tabular}
+	\end{center}
+	
+	\end{exampleblock}
+
+	
 	\end{frame}
 	
 	
