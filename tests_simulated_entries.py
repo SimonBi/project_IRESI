@@ -15,6 +15,9 @@ ax1 = fig1.add_subplot(111, projection='3d')
 fig2 = plt.figure()
 ax2 = fig2.add_subplot(111, projection='3d')
 
+# Standart deviation 
+fig3 = plt.figure()
+ax3 = fig3.add_subplot(111, projection='3d')
 
 size = 10000
 u = 100
@@ -59,7 +62,21 @@ DATA_freq = [freq_vect(DATA_elts[i], u+1) for i in range(13)]
 
 print('Starting computing sketchmin codeviance matrix')
 
-cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
+nb_tests = 10
+
+cod_full_matrix = np.array([[[0. for k in range(nb_tests)] for i in range(13)]
+                            for j in range(13)], dtype=float)
+for k in range(nb_tests):
+    cod_matrix = codeviance_all_streams(DATA_elts, eps, delta, u)
+    for i in range(13):
+        for j in range(13):
+            cod_full_matrix[i,j,k] = cod_matrix[i,j]
+            
+cod_matrix = np.array([[average(cod_full_matrix[i,j]) for i in range(13)]
+                            for j in range(13)], dtype=float)
+                            
+stdev_matrix = np.array([[stdev(cod_full_matrix[i,j]) for i in range(13)]
+                            for j in range(13)], dtype=float)
 
 print('Ending computing sketchmin codeviance matrix')
 
@@ -94,13 +111,22 @@ z1 = np.array([cod_real_matrix[i, j] for i in range(13) for j in range(13)])
 # Sketch min
 z2 = np.array([cod_matrix[i, j] for i in range(13) for j in range(13)])
 
+# Standard deviation
+z3 = np.array([stdev_matrix[i, j] for i in range(13) for j in range(13)])
+               
 X, Y = np.meshgrid(Xi, Yi)
 
-Z1 = griddata(x, y, z1, X, Y, interp='linear')
-Z2 = griddata(x, y, z2, X, Y, interp='linear')
+#Z1 = griddata(x, y, z1, X, Y, interp='linear')
+#Z2 = griddata(x, y, z2, X, Y, interp='linear')
+#Z3 = griddata(x, y, z3, X, Y, interp='linear')
+
+Z1 = griddata(x, y, z1, X, Y)
+Z2 = griddata(x, y, z2, X, Y)
+Z3 = griddata(x, y, z3, X, Y)
 
 ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1, color='g')
 ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1, color='r')
+ax3.plot_surface(X, Y, Z3, rstride=1, cstride=1, color='b')
 plt.show()
 
-print('Ending plotting')
+print(cod_matrix)

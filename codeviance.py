@@ -1,3 +1,5 @@
+from math import sqrt
+
 def average(list_x):
     """Return the average of list_x"""
     
@@ -9,6 +11,7 @@ def average(list_x):
     return s / n
 
 
+
 def codeviance(list_x, list_y):
     """Return the codeviance of list_x and list_y"""
     
@@ -17,10 +20,7 @@ def codeviance(list_x, list_y):
     return average(list_x*list_y) - (av_x * av_y)
 
 
-def average_sketchmin(list_x):
-    n = 0
-    s = 0
-    for i in range(len(list_x)):
-        s += list_x[i]*i
-        n += list_x[i]
-    return s / n
+
+def stdev(list_x):
+    """ Return tje standard deviation of list_x"""
+    return sqrt(codeviance(list_x, list_x))

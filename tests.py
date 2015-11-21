@@ -15,6 +15,10 @@ ax1 = fig1.add_subplot(111, projection='3d')
 fig2 = plt.figure()
 ax2 = fig2.add_subplot(111, projection='3d')
 
+# Standart deviation 
+fig3 = plt.figure()
+ax3 = fig3.add_subplot(111, projection='3d')
+
 eps = 0.001
 delta = 0.001
 
@@ -39,7 +43,20 @@ DATA_freq = [freq_vect(data[i], u+1) for i in range(nb_data)]
 
 print('Starting computing sketchmin codeviance matrix')
 
-cod_matrix = codeviance_all_streams(data, eps, delta, u)
+nb_tests = 10
+
+cod_full_matrix = np.array([[[0. for k in range(nb_tests)] for i in range(nb_data)]
+                            for j in range(nb_data)], dtype=float)
+for k in range(nb_tests):
+    cod_matrix = codeviance_all_streams(data, eps, delta, u)
+    for i in range(nb_data):
+        for j in range(nb_data):
+            cod_full_matrix[i,j,k] = cod_matrix[i,j]
+cod_matrix = np.array([[average(cod_full_matrix[i,j]) for i in range(nb_data)]
+                            for j in range(nb_data)], dtype=float)
+stdev_matrix = np.array([[stdev(cod_full_matrix[i,j]) for i in range(nb_data)]
+                            for j in range(nb_data)], dtype=float)
+
 
 print('Ending computing sketchmin codeviance matrix')
 
@@ -75,6 +92,10 @@ z1 = np.array([cod_real_matrix[i, j] for i in range(nb_data)
 # Sketch min
 z2 = np.array([cod_matrix[i, j] for i in range(nb_data)
                for j in range(nb_data)])
+               
+# Standard deviation
+z3 = np.array([stdev_matrix[i, j] for i in range(nb_data)
+               for j in range(nb_data)])
 
 # Log scale
 mini = min_vect(z1)
@@ -88,9 +109,11 @@ X, Y = np.meshgrid(Xi, Yi)
 
 Z1 = griddata(x, y, z1, X, Y, interp='linear')
 Z2 = griddata(x, y, z2, X, Y, interp='linear')
+Z3 = griddata(x, y, z3, X, Y, interp='linear')
 
 ax1.plot_surface(X, Y, Z1, rstride=1, cstride=1, color='g')
 ax2.plot_surface(X, Y, Z2, rstride=1, cstride=1, color='r')
+ax3.plot_surface(X, Y, Z3, rstride=1, cstride=1, color='b')
 plt.show()
 
 print('Ending plotting')
