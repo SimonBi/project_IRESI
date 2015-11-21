@@ -42,11 +42,12 @@
 	
 \section{DDoS}
 
-	\subsection{Simple view}
 	\begin{frame}{Outline}
 		\tableofcontents[currentsection]
 	\end{frame}
 
+	\subsection{Simple view}
+	
 	\begin{frame}{Simple attack}
 	
 \begin{block}
@@ -70,6 +71,7 @@
 	\end{frame}
 	
 	\subsection{Multiple streams}
+	
 	\begin{frame}{DDoS attack}
 	
 \begin{block}
@@ -123,11 +125,18 @@
 
 \section{Programming the algorithm}
 
-	\subsection{}
 	\begin{frame}{Outline}
 		\tableofcontents[currentsection]
 	\end{frame}
 
+	\subsection{}
+
+	\begin{frame}
+	
+	
+	
+	\end{frame}		
+	
 	\begin{frame}
 		% choosed python cause of its fast development time, also the more convenient based on the languages we know
 		% explain how we extract and transform them into entries to the algorithm ?
@@ -137,15 +146,39 @@
 	
 \section{Experimental results}
 
-	\subsection{Real data}
+	
 	\begin{frame}{Outline}
 		\tableofcontents[currentsection]
 	\end{frame}
 
+	\subsection{Real data traces}
+	
+	\begin{frame}{Real data traces}
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto]
+
+	\node (A) {\includegraphics[scale=0.05]{router.png}};
+	\node (B) [above left of=A, node distance=3.5cm] {\begin{tabular}{c}\includegraphics[scale=0.2]{file.png}\\\texttt{EPA-HTTP}\end{tabular}};
+	\node (C) [above right of=A, node distance=3.5cm] {\begin{tabular}{c}\includegraphics[scale=0.2]{file.png}\\\texttt{SDSC-HTTP1}\end{tabular}};
+	\node (D) [below left of=A, node distance=3.5cm] {\begin{tabular}{c}\includegraphics[scale=0.2]{file.png}\\\texttt{SDSC-HTTP2}\end{tabular}};
+	\node (E) [below right of=A, node distance=3.5cm]{\begin{tabular}{c}\includegraphics[scale=0.2]{file.png}\\\texttt{Calgary-HTTP}\end{tabular}};
+
+	
+	  \path
+	(B) edge [draw=purple, line width=0.5mm] node {} (A)
+	(C) edge [draw=purple, line width=0.5mm] node {} (A)
+	(D) edge [draw=purple, line width=0.5mm] node {} (A)
+	(E) edge [draw=purple, line width=0.5mm] node {} (A);
+
+		\end{tikzpicture}
+	\end{center}		
+	\end{frame}
+	
 	\begin{frame}{Real data traces}
 		
 	\begin{center}
 		\begin{block}{Codeviance matrix of real data traces}
+		\[ \varepsilon = 0.001 \quad \vert \quad \delta = 0.001 \]
 		\end{block}
 		\begin{tabular}{cc}
 			\includegraphics[scale=0.26]{realtests_real1.png} &
@@ -156,7 +189,7 @@
 		
 	\end{frame}
 	
-	\subsection{Random data}
+	\subsection{Randomly generated data}
 	\begin{frame}{Generated data traces}
 		\footnotesize
 	
