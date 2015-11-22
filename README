@@ -10,11 +10,17 @@ We used python3 along with the libraries matplotlib and numpy for this project.
 You might need to run
     $ pip3 install numpy matplotlib
 
-On Ubuntu, the option "interp='linear" for griddata might not work, removing it
+On Ubuntu, the option "interp='linear'" for griddata might not work, removing it
 may make it work.
 
 
 ================================== Run tests ===================================
+
+Both test will plot the real codeviance matrix (green chart), the average
+codeviance matrix calculated over nb_tests runs of the SketchMin algorithm
+(red chart) (nb_tests is currently set to 10, it can be modified), and the
+standard deviation of the SketchMin results (blue chart).
+
 
     - Real traces
 Simply type :
@@ -22,4 +28,4 @@ Simply type :
 
     - Randomly generated traces
 Simply type :
-    $ python3 tests_simulated-entries.py
+    $ python3 tests_simulated_entries.py
