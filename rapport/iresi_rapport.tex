@@ -112,7 +112,7 @@ For the detection we need to first select the entries to then apply the algorith
 \subsection{Extracting information from data traces}
 
 
-In data traces, each line corresponds to a request made to the server. To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of only the distinct elements and then converting each element of the original list to its index in the distinct elements list.
+In data traces, each line corresponds to a request made to the server. To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of the distinct elements and the converting each element of the original list to the its index in the distinct elements list.
 % TODO dernière phrase pas claire
 
 \paragraph{}This process has to be extended to the extraction of multiple traces in a single time because what we want in the end is eventually find correlation between multiple traces. This was the most difficult part of the work. Same entries must be converted to the same integer, even if they're not in the same trace. We were first making the extraction considering only one trace, but we finally had to make the extraction of all traces at once. To do that the distinct elements list has just to be shared between the multiple extractions. And so, identical requests can be correlated after applying the \texttt{SketchMin} algorithm and act in reaction.
@@ -245,11 +245,11 @@ We calculated the real codeviance matrix, and we applied the \texttt{SketchMin} 
 
 In the end the results of the algorithm seem to match the exact entries, with a difference of scale. That's why the \texttt{Sketchmin} algorithm seems to be an efficient way to calculate the codeviance of huge-sized data traces.
 
-\paragraph{}However, our program isn't applicable to a real application because we were here only considering a static data stream. But in reality, we have to apply this to moving streams, and so to determine when to drop data. Considering several-months-old data does not seem very wise. The next step would be to deal with this. Several algorithms exist, using buffers.
+However, our program isn't applicable to a real application because we were here only considering a static data stream. But in reality, we have to apply this to moving streams, and so to determine when to drop data. Considering several-months-old data does not seem very wise. The next step would be to deal with this. Several algorithms exist, using buffers.
 
-\paragraph{}It is also possible to improve the time complexity of our program. We used only sequential programming, but it would be better to use parallel programming, especially because the computations related to a hashing function are independent from those related to another hashing function.
+It is also possible to improve the time complexity of our program. We used only sequential programming, but it would be better to use parallel programming, especially because the computations related to a hashing function are independent from those related to another hashing function.
 
-\paragraph{}Finally, we programmed a procedure to calculate the codeviance matrix of several data streams. But, in order to use this information, it is necessary to make empirical learning, so as to become able to tell when an attack is happening, according to the valued calculated.
+Finally, we programmed a procedure to calculate the codeviance matrix of several data streams. But, in order to use this information, it is necessary to make empirical learning, so as to become able to tell when an attack is happening, according to the valued calculated.
 
 
 \clearpage
