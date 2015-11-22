@@ -112,7 +112,7 @@ For the detection we need to first select the entries to then apply the algorith
 \subsection{Extracting information from data traces}
 
 
-In data traces, each line corresponds to a request made to the server. To extract a certain kind information, like the source of a request, there is just to go through each line which represent a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of only the distinct elements and then converting each element of the original list to its index in the distinct elements list.
+In data traces, each line corresponds to a request made to the server. To extract a certain kind information, like the source of a request, there is just to go through each line which represents a line. And each time split the line based on white-spaces and extract a certain entry. The entries are put in a list, and if needed are converted to integers without losing the fact that some entries are identical and others different. This can be done by creating a list of only the distinct elements and then converting each element of the original list to its index in the distinct elements list.
 % TODO dernière phrase pas claire
 
 \paragraph{}This process has to be extended to the extraction of multiple traces in a single time because what we want in the end is eventually find correlation between multiple traces. This was the most difficult part of the work. Same entries must be converted to the same integer, even if they're not in the same trace. We were first making the extraction considering only one trace, but we finally had to make the extraction of all traces at once. To do that the distinct elements list has just to be shared between the multiple extractions. And so, identical requests can be correlated after applying the \texttt{SketchMin} algorithm and act in reaction.
@@ -136,7 +136,7 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 \paragraph{}We can then create the partitions, and we get a matrix $R_{0 \leq i \leq t-1, 1 \leq j \leq k}$ where 
  	\[ R_{i,j} = \# \lbrace x \in D : h_i(x) = j \rbrace \]
  	
-\paragraph{}We can now create a function that receives two data traces. It calculates the $R$ matrfor both trace, and then computes the codeviance :
+\paragraph{}We can now create a function that receives two data traces. It calculates the $R$ matrix for both trace, and then computes the codeviance :
 	\[ \CodSk(D_1, D_2) = \underset{0 \leq i \leq t-1}{\min} \Cod(R_1[i], R_2[i]) \]
 where $R[i]$ is the line $i$ of the matrix.
 
@@ -157,7 +157,7 @@ To evaluate the correctness of the algorithm, we just need to see if the results
 \subsection{Real data traces}
 
 
-For the real traces, we used the file-names as entries for the algorithm, after converting them to integer by simply matching the index of the distinct elements. We used file-names because the calgaryaccess traces didn't really have an entry for the sources of the requests, and we wanted a consistent information extraction over the multiple traces to eventually find correlations. Here are the rest of the parameters for the experiment :
+For the real traces, we used the file-names as entries for the algorithm, after converting them to integers by simply matching the index of the distinct elements. We used file-names because the calgaryaccess traces didn't really have an entry for the sources of the requests, and we wanted a consistent information extraction over the multiple traces to eventually find correlations. Here are the rest of the parameters for the experiment :
 
 
 \begin{itemize}
@@ -249,7 +249,7 @@ However, our program isn't applicable to a real application because we were here
 
 It is also possible to improve the time complexity of our program. We used only sequential programming, but it would be better to use parallel programming, especially because the computations related to a hashing function are independent from those related to another hashing function.
 
-Finally, we programmed a procedure to calculate the codeviance matrix of several data streams. But, in order to use this information, it is necessary to make empirical learning, so as to become able to tell when an attack is happening, according to the valued calculated.
+Finally, we programmed a procedure to calculate the codeviance matrix of several data streams. But, in order to use this information, it is necessary to make empirical learning, so as to become able to tell when an attack is happening, according to the values calculated.
 
 
 \section*{References}
