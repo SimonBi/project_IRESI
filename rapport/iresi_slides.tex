@@ -132,9 +132,6 @@
 	\subsection{Extraction}
 	
 	\begin{frame}{Extraction on data traces}
-		% choosed python cause of its fast development time, also the more convenient based on the languages we know
-		% explain how we extract and transform them into entries to the algorithm ?
-		% numpy/matplotlib ?
 		\begin{block}{}
 			\begin{itemize}
 				\item Pick an entry on each line (=request), like the source or file requested ;
@@ -142,6 +139,25 @@
 				\item if multiple traces, extract all at once to keep correlation.
 			\end{itemize}
 		\end{block}
+		
+		\begin{exampleblock}{Example}
+	\scriptsize
+	
+\begin{tabular}{lcr}
+GET /Consumer.html & $\longrightarrow$ & 1\\
+GET /Consumer.html & $\longrightarrow$ & 1\\
+GET /Consumer.html & $\longrightarrow$ & 1\\
+GET /News.html & $\longrightarrow$ & 2\\
+GET /icons/circle\_logo\_small.gif & $\longrightarrow$ & 3\\
+GET /logos/small\_gopher.gif & $\longrightarrow$ & 4\\
+GET /logos/us-flag.gif & $\longrightarrow$ & 5\\
+GET /logos/small\_gopher.gif & $\longrightarrow$ & 4\\
+GET /logos/small\_ftp.gif & $\longrightarrow$ & 6\\
+GET /icons/book.gif & $\longrightarrow$ & 7\\
+\end{tabular}	
+	
+	\end{exampleblock}		
+		
 	\end{frame}
 	
 	\subsection{Computing the codeviance}
@@ -182,7 +198,7 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 	\node (B) [above left of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline \texttt{Matplotlib}, \texttt{Numpy}\\ \hline \end{tabular}};
 	\node (C) [above right of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline Reading files\\ \hline \end{tabular}};
 	\node (D) [below left of=A, node distance=3.5cm] {\begin{tabular}{|c|}\hline Easy syntax\\ \hline \end{tabular}};
-	\node (E) [below right of=A, node distance=3.5cm]{\begin{tabular}{|c|}\hline Library modules written in C\\ \hline \end{tabular}};
+	\node (E) [below right of=A, node distance=3.5cm]{\begin{tabular}{|c|}\hline Huge standard library\\ \hline \end{tabular}};
 
 	\path
 	
@@ -312,6 +328,7 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 \section*{Conclusion}
 
 	\begin{frame}{Conclusion}
+	
 		\begin{block}{}
 			Algorithm results look the same as the exact entries, on a different scale. Can use the same method to detect attack on exact traces.
 		\end{block}
@@ -323,6 +340,29 @@ where $a_i, b_i$ are randomly generated in $\lbrace 1 \dots t-1 \rbrace$ for $a_
 				\item find a way of detecting attacks without false-detection.
 			\end{itemize}
 		\end{block}
+		
+	\begin{center}
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto]
+
+	\node (A) {computations};
+	\node (B) [right of=A, node distance=3.5cm] {$\vdots$};
+	\node (C) [above of=B, node distance=1.cm] {$h_1$};
+	\node (D) [below of=B, node distance=1.cm] {$h_t$};
+	\node (E) [right of=B, node distance=3.5cm]{gathering results};
+
+	
+	  \path
+	(A) edge [draw=purple, line width=0.2mm] node {} (B)
+	(A) edge [draw=purple, line width=0.2mm] node {} (C)
+	(A) edge [draw=purple, line width=0.2mm] node {} (D)
+	(B) edge [draw=purple, line width=0.2mm] node {} (E)
+	(C) edge [draw=purple, line width=0.2mm] node {} (E)
+	(D) edge [draw=purple, line width=0.2mm] node {} (E);
+
+		\end{tikzpicture}
+	\end{center}			
+		
+		
 	\end{frame}
 	
 	\begin{frame} % Take Away
